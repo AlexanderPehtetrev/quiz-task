@@ -8,8 +8,12 @@ const buttons = document.querySelectorAll(".answer-row button");
 let overallCounter = 0;
 let correctCounter = 0;
 let wrongCounter = 0;
+let answer=0;
+buttons.forEach((button) => {
+    button.addEventListener("click", countAnswers(button));
+})
 
-function countAnswers(answer, button) {
+function countAnswers(button) {
     return function () {
      overallCounter += 1;  
      
@@ -34,9 +38,7 @@ function getRandomInt(max) {
 
 function generateCorrectButton(answer) {
 
-    buttons.forEach((button) => {
-        button.addEventListener("click", countAnswers(answer, button));
-    })
+    
 
     buttons.forEach ((button) => {
         button.addEventListener("click", generateQuastion);
@@ -59,6 +61,9 @@ function generateCorrectButton(answer) {
 }
 
 function startQuiz() {
+ overallCounter = 0;
+ correctCounter = 0;
+ wrongCounter = 0;
 startWrapper.classList.add("hide");
 quizWrapper.classList.remove("hide");
 generateQuastion();
@@ -79,8 +84,7 @@ function generateQuastion() {
     const number1 = getRandomInt(50);
     const number2 = getRandomInt(50);
     const sign = generateSign();
-    let answer;
-
+    
     if (sign === "+") {
          answer = number1 + number2
     }
